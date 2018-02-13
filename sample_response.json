@@ -1,0 +1,34 @@
+
+{
+"id": "5a81d77e3e3f36340ddcbc02",
+"idMemberCreator": "4fac503b74b635c2500abf5a",
+"data": {
+"list": {
+"name": "To Do This Week",
+"id": "5a81d3e88ce16eb33afe77a0"
+},
+"board": {
+"shortLink": "OaSp06ND",
+"name": "Goals",
+"id": "5a81d3d0b5984c4b4527f80b"
+},
+"card": {
+"shortLink": "7yEmpDGi",
+"idShort": 13,
+"id": "5a81d755b806f31e1db9fa90",
+"name": "Brainstorm ways to get Live Booth in front of more people."
+},
+"old": {
+"name": "Create a list of blogs, websites, groups, etc. to market Live Booth to."
+}
+},
+"type": "updateCard",
+"date": "2018-02-12T18:05:50.962Z",
+"memberCreator": {
+"id": "4fac503b74b635c2500abf5a",
+"avatarHash": "64dc20ddda11a53db7531b8818365f0e",
+"fullName": "Austin Brown",
+"initials": "AB",
+"username": "austinbrown"
+}
+},

@@ -1,5 +1,8 @@
 import requests
 import os
+import sys
+import ast
+import argparse
 from dateutil.parser import parse
 from constants import BOARDS_URL, BOARD_ACTIONS_URL, BOARD_LISTS_URL
 
@@ -97,11 +100,11 @@ def get_moves_to_lists(
     for entry in data:
         dt = parse(entry['date'])
         if dt < edt and dt > sdt:
-            type = entry['type']
+            action_type = entry['type']
             date = entry['date']
             board = entry['data']['board']['name']
             member = entry['memberCreator']['fullName']
-            if type == 'updateCard':
+            if action_type == 'updateCard':
                 if (
                     'listAfter' in entry['data'] and
                     'listBefore' in entry['data']
@@ -124,15 +127,77 @@ def get_moves_to_lists(
     return matches
 
 
-matches = get_moves_to_lists(
-    'JasonsAppFinal',
-    ['To Do For Next Week Done', 'Done'],
-    '2015-02-12',
-    '08:00',
-    '2019-02-12',
-    '23:59'
-)
+def show_response(
+    board_name,
+    list_names,
+    start_date,
+    start_time,
+    end_date,
+    end_time
+):
 
-response = get_response_from_matches(matches)
+    matches = get_moves_to_lists(
+        board_name,
+        list_names,
+        start_date,
+        start_time,
+        end_date,
+        end_time
+    )
 
-print response
+    response = get_response_from_matches(matches)
+
+    print(response)
+
+
+def main(argv):
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "board_name",
+        help="Name of Trello Board"
+    )
+
+    parser.add_argument(
+        "list_names",
+        help="List of 'List Names'"
+    )
+
+    parser.add_argument(
+        "start_date",
+        help="Start Date (YYYY-MM-DD)",
+
+    )
+
+    parser.add_argument(
+        "start_time",
+        help="Start Time (HH:MM) Military",
+
+    )
+
+    parser.add_argument(
+        "end_date",
+        help="End Date (YYYY-MM-DD)",
+
+    )
+
+    parser.add_argument(
+        "end_time",
+        help="End Time (HH:MM) Military",
+    )
+
+    args = parser.parse_args()
+
+    show_response(
+        args.board_name,
+        ast.literal_eval(args.list_names),
+        args.start_date,
+        args.start_time,
+        args.end_date,
+        args.end_time
+    )
+
+
+if __name__ == '__main__':
+    main(sys.argv)

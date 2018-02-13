@@ -38,7 +38,13 @@ def get_list_id_from_name(board_name, list_name):
 
 
 def get_datetime_string_from_date_time(date, time):
-    return '{} {}:00.000000+00:00'.format(date, time)
+    date_pieces = date.split('-')
+    new_date = '{}-{}-{}'.format(
+        date_pieces[2],
+        date_pieces[0],
+        date_pieces[1]
+    )
+    return '{} {}:00.000000+00:00'.format(new_date, time)
 
 
 def format_match(board, member, date, card_name, before_name, after_name):
@@ -166,7 +172,7 @@ def main(argv):
 
     parser.add_argument(
         "start_date",
-        help="Start Date (YYYY-MM-DD)",
+        help="Start Date (MM-DD-YYYY)",
 
     )
 
@@ -178,7 +184,7 @@ def main(argv):
 
     parser.add_argument(
         "end_date",
-        help="End Date (YYYY-MM-DD)",
+        help="End Date (MM-DD-YYYY)",
 
     )
 
